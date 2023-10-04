@@ -4,12 +4,13 @@ const { prisma } = require('../config/prisma');
 //get all added products
 async function getCart() {
   try {
-    const addedProduct = await prisma.addedProduct.findMany({
-      include: {
-        user: true,
-        product: true
-      }
-    });
+    const addedProduct = await prisma.addedProduct.findMany();
+      // {
+    //   include: {
+    //     user: true,
+    //     product: true
+    //   }
+    // });
     return addedProduct;
   } catch (error) {
     console.log(error);
@@ -21,22 +22,22 @@ async function getCart() {
 async function addProductToCart(userId, productId, quantity) {
   try {
     // Check if the user and product exist
-    const user = await prisma.user.findUnique({
+    const thisUser = await prisma.user.findUnique({
       where: { 
         id: Number(userId) },
     });
 
-    const product = await prisma.product.findUnique({
+    const thisProduct = await prisma.product.findUnique({
       where: { 
         id: Number(productId) },
     });
 
-    if (!user || !product) {
+    if (!thisUser || !thisProduct) {
       throw new Error('please login to add product to cart');
     }
 
     // new entry
-    const addedProduct = await prisma.addedProduct.create({
+    const productAdded = await prisma.addedProduct.create({
       data: {
         user: { connect: { id: userId } },
         product: { connect: { id: productId } },
@@ -44,7 +45,7 @@ async function addProductToCart(userId, productId, quantity) {
       },
     });
 
-    return addedProduct;
+    return productAdded;
   } catch (error) {
     throw error;
   }
@@ -53,8 +54,5 @@ async function addProductToCart(userId, productId, quantity) {
 module.exports = {
   getCart,
   addProductToCart
-  // getProductById
-  // updateProductById,
-  // deleteProductById,
 };
   

@@ -8,7 +8,10 @@ shopRoutes.get('/', shopController.getProducts);
 // Create a new product
 shopRoutes.post('/', shopController.createProduct);
 
-// // Get a product by ID
+// create multiple products
+// shopRoutes.post('/', shopController.createMultipleProducts);
+
+// Get a product by ID
 shopRoutes.get('/:productId', shopController.getProductById);
 
 module.exports = { shopRoutes };

@@ -27,6 +27,26 @@ async function createProduct(product) {
   }
 }
 
+//create multiple products
+// async function createMultipleProducts(products) {
+//   const createdProducts = [];
+//   try {
+//     for (const productData of products) {
+//       const createdProduct = await prisma.product.create({
+//         data: productData,
+//       });
+
+//       createdProducts.push(createdProduct);
+//     }
+
+//     return createdProducts;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+  
+
+
 // get a product by ID
 async function getProductById(productId) {
   try {
@@ -46,5 +66,6 @@ async function getProductById(productId) {
 module.exports = {
   getProducts,
   createProduct,
+  // createMultipleProducts,
   getProductById
 };

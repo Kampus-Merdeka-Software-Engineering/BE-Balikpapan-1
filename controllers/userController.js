@@ -1,25 +1,25 @@
 const userService = require('../services/userService');
 
-// get all users (for admin??)
-// async function get(req, res) {
-//   try {
-//     const product = await productService.getProducts();
-//     res.status(200).json({
-//       message: "Successfully fetched all products",
-//       data: product
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
+// get all users 
+async function getUsers(req, res) {
+  try {
+    const user = await userService.getUsers();
+    res.status(200).json({
+      message: "Successfully fetched all users",
+      data: user
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
 
 
 // Create a new user
 async function newUser(req, res) {
   try {
-    const newUser = await userService.newUser(req.body);
-    res.status(201).json({ newUser });
+    const userCreated = await userService.newUser(req.body);
+    res.status(201).json({ userCreated });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
@@ -34,12 +34,15 @@ async function getSpecificUser(req, res) {
   };
 
   try {
-    const user = await getSpecificUser(email);
+    const user = await userService.getSpecificUser(email);
 
     if (!user) {
       res.status(404).json({ error: 'User not found.' });
     }
-    res.status(200).json(user);
+    res.status(200).json({
+      message: "successfully fetch user",
+      data: user
+      });
     
   } catch (error) {
     res.status(500).json({ error: 'Failed to return user.' });
@@ -97,7 +100,8 @@ async function getSpecificUser(req, res) {
 // }
 
 module.exports = {
+  getUsers,
   newUser,
-  getSpecificUser
+  // getSpecificUser
 
 };

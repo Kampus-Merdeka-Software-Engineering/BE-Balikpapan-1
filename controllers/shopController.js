@@ -26,6 +26,17 @@ async function createProduct(req, res) {
   }
 }
 
+//create multiple products
+// async function createMultipleProducts(req, res) {
+//   try {
+//     const createdProducts = await productService.createMultipleProducts(req.body);
+//     res.status(201).json({createdProducts});
+//   } catch (error) {
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// };
+
+
 // Get a product by ID
 async function getProductById(req, res) {
   const { productId } = req.params;
@@ -94,6 +105,7 @@ async function getProductById(req, res) {
 module.exports = {
   getProducts,
   createProduct,
+  // createMultipleProducts,
   getProductById
 //   updateProductById,
 //   deleteProductById,
