@@ -10,6 +10,21 @@ async function getProducts() {
   }
 }
 
+// fungsi mendapat fetured product
+async function getFeaturedProducts() {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        isFeatured: true
+      },
+      take: 9,
+    })
+    return product;
+  } catch(error) {
+
+  }
+} 
+
 //create product (non accessable for user || admin only)
 async function createProduct(product) {
   try {

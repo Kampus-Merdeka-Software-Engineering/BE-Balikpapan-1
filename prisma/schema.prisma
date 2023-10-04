@@ -24,6 +24,8 @@ model product {
   brandname   String
   price       Float
   image       String
+  newArrival  Boolean // true
+  isFeatured  Boolean // true
   carts       addedProduct[]
 }
 
