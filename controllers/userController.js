@@ -1,41 +1,11 @@
-const cartService = require('../services/cartService');
+const userService = require('../services/userService');
 
-// get all added products
-async function getCart(req, res) {
-  try {
-    const addedProduct = await cartService.getCart();
-    res.status(200).json({
-      message: "Successfully fetched all added products in cart",
-      data: addedProduct
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-}
-
-
-// add product to cart
-async function addProductToCart(req, res) {
-  try {
-    const addedProduct = await cartService.addProductToCart(req.body);
-    res.status(201).json({ addedProduct });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-}
-
-// Get a product by ID
-// async function getProductById(req, res) {
-//   const { productId } = req.params;
+// get all users (for admin??)
+// async function get(req, res) {
 //   try {
-//     const product = await productService.getProductById(productId);
-//     if (!product) {
-//       return res.status(404).json({ error: 'product not found' });
-//     }
+//     const product = await productService.getProducts();
 //     res.status(200).json({
-//       message: "Successfully fetched product",
+//       message: "Successfully fetched all products",
 //       data: product
 //     });
 //   } catch (error) {
@@ -43,6 +13,41 @@ async function addProductToCart(req, res) {
 //     res.status(500).json({ error: 'Internal server error' });
 //   }
 // }
+
+
+// Create a new user
+async function newUser(req, res) {
+  try {
+    const newUser = await userService.newUser(req.body);
+    res.status(201).json({ newUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+// Get a user by email
+async function getSpecificUser(req, res) {
+  const { email } = req.query;
+  if (!email) {
+    return res.status(400).json({ error: 'Email query parameter is needed' });
+  };
+
+  try {
+    const user = await getSpecificUser(email);
+
+    if (!user) {
+      res.status(404).json({ error: 'User not found.' });
+    }
+    res.status(200).json(user);
+    
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to return user.' });
+  }
+};
+
+
+  
 
 // Update a product by ID
 // async function updateProductById(req, res) {
@@ -92,7 +97,7 @@ async function addProductToCart(req, res) {
 // }
 
 module.exports = {
-  getCart,
-  addProductToCart
+  newUser,
+  getSpecificUser
 
 };

@@ -10,7 +10,7 @@ async function getProducts() {
   }
 }
 
-
+//create product (non accessable for user || admin only)
 async function createProduct(product) {
   try {
     const createdProduct = await prisma.product.create({
@@ -42,44 +42,9 @@ async function getProductById(productId) {
 }
 
 
-// Function to update a product by ID
-// async function updateProductById(productId, updatedProduct) {
-//   try {
-//     const productUpdate = await prisma.product.update({
-//       where: {
-//         id: Number(productId)
-//       },
-//       data: {
-//         productname: product.productname,
-//         brandname: product.brandname,
-//         price: product.price,
-//         image: product.image
-//       }
-//     })
-//     return productUpdate;
-//   } catch(error) {
-//     throw new Error(error)
-//   }
-// }
-
-// Function to delete a product by ID
-// async function deleteProductById(productId) {
-//   try {
-//     const deletedProduct = await prisma.product.delete({
-//       where: {
-//         id: Number(productId)
-//       }
-//     })
-//     return deletedProduct;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
 module.exports = {
   getProducts,
   createProduct,
   getProductById
-  // updateProductById,
-  // deleteProductById,
 };

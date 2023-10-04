@@ -10,30 +10,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model user {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  carts    addedProduct[]
+}
+
 model product {
-  id Int    @id @default(autoincrement())
-  productname String @unique
-  brandname String
-  price Float
-  image String
-  addedProducts addedProduct[]
+  id          Int      @id @default(autoincrement())
+  productname String   @unique
+  brandname   String
+  price       Float
+  image       String
+  carts       addedProduct[]
 }
 
 model addedProduct {
-  id Int @id @default(autoincrement())
-  quantity Int
-  products product[]
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  productId Int
+  quantity  Int
+  //foreign keys
+  user      user      @relation(fields: [userId], references: [id])
+  product   product   @relation(fields: [productId], references: [id])
 }
 
 model article{
-  id Int @id @default(autoincrement())
-  image String
-  title String
+  id      Int @id @default(autoincrement())
+  image   String
+  title   String
   content String @db.VarChar (500)
-
-
 }
 
-
-
-// npx prisma migrate dev --name init

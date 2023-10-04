@@ -6,6 +6,6 @@ const cartRoutes = express.Router();
 cartRoutes.get('/', cartController.getCart);
 
 // add product to cart
-// cartRoutes.post('/', cartController.addToCart);
+cartRoutes.post('/', cartController.addProductToCart);
 
 module.exports = { cartRoutes };

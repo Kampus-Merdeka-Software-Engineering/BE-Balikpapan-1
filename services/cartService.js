@@ -6,7 +6,8 @@ async function getCart() {
   try {
     const addedProduct = await prisma.addedProduct.findMany({
       include: {
-        products: true
+        user: true,
+        product: true
       }
     });
     return addedProduct;
@@ -16,28 +17,44 @@ async function getCart() {
 }
 
 
+//coba post
+async function addProductToCart(userId, productId, quantity) {
+  try {
+    // Check if the user and product exist
+    const user = await prisma.user.findUnique({
+      where: { 
+        id: Number(userId) },
+    });
 
-// async function addToCart(addedProduct) {
-//   try {
-//     const addProduct = await prisma.addedProduct.create({
-//       data: {
-//         quantity: Int,
-//         products: addedProduct.products
-//       }
-//     })
-//     return addProduct;
-//   } catch (error) {
-//     throw new Error(error)
-//   }
-// }
+    const product = await prisma.product.findUnique({
+      where: { 
+        id: Number(productId) },
+    });
 
+    if (!user || !product) {
+      throw new Error('please login to add product to cart');
+    }
 
+    // new entry
+    const addedProduct = await prisma.addedProduct.create({
+      data: {
+        user: { connect: { id: userId } },
+        product: { connect: { id: productId } },
+        quantity
+      },
+    });
 
-    module.exports = {
-        getCart,
-        // addToCart
-        // getProductById
-        // updateProductById,
-        // deleteProductById,
-      };
+    return addedProduct;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  getCart,
+  addProductToCart
+  // getProductById
+  // updateProductById,
+  // deleteProductById,
+};
   
