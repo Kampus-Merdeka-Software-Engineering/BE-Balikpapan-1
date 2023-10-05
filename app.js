@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const request = require('request');
 const { userRoutes } = require('./routes/userRoutes');
 const { shopRoutes } = require('./routes/shopRoutes');
 const { cartRoutes } = require('./routes/cartRoutes');
 const { blogRoutes } = require('./routes/blogRoutes');
+const { homeRoutes } = require('./routes/homeRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -27,6 +27,9 @@ app.use('/', cartRouter);
 const blogRouter = express.Router();
 app.use('/', blogRouter)
 
+const homeRouter = express.Router();
+app.use('/', homeRouter)
+
 
 // /user
 userRouter.use('/user', userRoutes);
@@ -36,6 +39,8 @@ shopRouter.use('/shop', shopRoutes);
 cartRouter.use('/cart', cartRoutes);
 // /blog
 blogRouter.use('/blog', blogRoutes);
+// /homepage
+homeRouter.use('/homepage', homeRoutes);
 
 // error handling 
 app.use((err, req, res, next) => {

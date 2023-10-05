@@ -4,13 +4,13 @@ const { prisma } = require('../config/prisma');
 //get all added products
 async function getCart() {
   try {
-    const addedProduct = await prisma.addedProduct.findMany();
-      // {
-    //   include: {
-    //     user: true,
-    //     product: true
-    //   }
-    // });
+    const addedProduct = await prisma.addedProduct.findMany(
+      {
+      include: {
+        user: true,
+        product: true
+      }
+    });
     return addedProduct;
   } catch (error) {
     console.log(error);

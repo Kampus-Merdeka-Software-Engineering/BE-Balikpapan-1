@@ -14,6 +14,34 @@ async function getProducts(req, res) {
   }
 }
 
+//get featured products
+async function getFeaturedProducts(req, res) {
+  try {
+    const products = await productService.getFeaturedProducts();
+    res.status(200).json({
+      message: "Successfully fetched featured products",
+      data: products
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+//get new arrival products
+async function getNewArrival(req, res) {
+  try {
+    const products = await productService.getNewArrival();
+    res.status(200).json({
+      message: "Successfully fetched new arrival products",
+      data: products
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 
 // Create a new product
 async function createProduct(req, res) {
@@ -25,16 +53,6 @@ async function createProduct(req, res) {
     res.status(500).json({ error: 'Internal server error' });
   }
 }
-
-//create multiple products
-// async function createMultipleProducts(req, res) {
-//   try {
-//     const createdProducts = await productService.createMultipleProducts(req.body);
-//     res.status(201).json({createdProducts});
-//   } catch (error) {
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// };
 
 
 // Get a product by ID
@@ -55,57 +73,12 @@ async function getProductById(req, res) {
   }
 }
 
-// Update a product by ID
-// async function updateProductById(req, res) {
-//   const { productId } = req.params;
-//   try {
-//     const product = await productService.getProductById(productId);
-//     if (!product) {
-//       return res.status(404).json({ error: 'product not found' });
-//     }
-
-//     if (req.body.productname && req.body.productname !== product.productname) { 
-//       product.productname = req.body.productname;
-//     }
-    
-//     if (req.body.price && req.body.price !== product.price) {
-//       product.price = req.body.price;
-//     }
-
-//     //SIZE/keterangan??--> brand, image, ...
-
-//     await productService.updateProductById(productId, product);
-//     res.status(200).json({
-//       message: "Successfully update product",
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
-
-// // Delete a product by ID
-// async function deleteProductById(req, res) {
-//   const { productId } = req.params;
-//   try {
-//     const product = await productService.getProductById(productId);
-//     if (!product) {
-//       return res.status(404).json({ error: 'product not found' });
-//     }
-//     const deleted = await productService.deleteProductById(productId);
-//     res.status(200).json({
-//       message: "Successfully delete product",
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
 
 module.exports = {
   getProducts,
   createProduct,
-  // createMultipleProducts,
+  getNewArrival,
+  getFeaturedProducts,
   getProductById
 //   updateProductById,
 //   deleteProductById,

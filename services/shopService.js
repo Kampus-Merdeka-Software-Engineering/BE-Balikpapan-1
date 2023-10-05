@@ -17,9 +17,24 @@ async function getFeaturedProducts() {
       where: {
         isFeatured: true
       },
-      take: 9,
+      take: 8
     })
-    return product;
+    return products;
+  } catch(error) {
+
+  }
+} 
+
+// fungsi mendapat fetured product
+async function getNewArrival() {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        newArrival: true
+      },
+      take: 8
+    })
+    return products;
   } catch(error) {
 
   }
@@ -81,6 +96,7 @@ async function getProductById(productId) {
 module.exports = {
   getProducts,
   createProduct,
-  // createMultipleProducts,
+  getFeaturedProducts,
+  getNewArrival,
   getProductById
 };
