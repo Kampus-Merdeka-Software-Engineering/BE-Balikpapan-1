@@ -32,6 +32,7 @@ async function getNewArrival() {
       where: {
         newArrival: true
       },
+      skip: 10,
       take: 8
     })
     return products;

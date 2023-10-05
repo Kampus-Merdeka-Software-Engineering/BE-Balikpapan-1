@@ -27,7 +27,6 @@ async function getUsers() {
 }
 
 // get user by email (for log in)
-// apakah ini by user email saja atau password juga????
 async function getSpecificUser(email) {
   try {
     const userEmail = await prisma.user.findUnique({
@@ -46,6 +45,6 @@ async function getSpecificUser(email) {
 module.exports = {
   getUsers,
   newUser,
-  getSpecificUser
+  // getSpecificUser
 
 };
