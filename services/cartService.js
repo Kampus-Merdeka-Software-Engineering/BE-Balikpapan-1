@@ -41,7 +41,7 @@ async function addProductToCart(userId, productId, quantity) {
       data: {
         user: { connect: { id: userId } },
         product: { connect: { id: productId } },
-        quantity
+        quantity: Number(quantity)
       },
     });
 

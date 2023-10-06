@@ -26,7 +26,7 @@ async function getFeaturedProducts() {
   }
 } 
 
-// fungsi mendapat fetured product
+// fungsi mendapat new arrival
 async function getNewArrival() {
   try {
     const products = await prisma.product.findMany({

@@ -26,7 +26,7 @@ async function getUsers() {
   }
 }
 
-// get user by email (for log in)
+// get user by email (for login)
 async function getSpecificUser(email) {
   try {
     const userEmail = await prisma.user.findUnique({

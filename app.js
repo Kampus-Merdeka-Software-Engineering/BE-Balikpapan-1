@@ -40,7 +40,7 @@ cartRouter.use('/cart', cartRoutes);
 // /blog
 blogRouter.use('/blog', blogRoutes);
 // /homepage
-homeRouter.use('/homepage', homeRoutes);
+homeRouter.use('/home', homeRoutes);
 
 // error handling 
 app.use((err, req, res, next) => {

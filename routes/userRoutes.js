@@ -8,6 +8,6 @@ userRoutes.get('/', userController.getUsers);
 userRoutes.post('/', userController.newUser);
 
 // Get a user by email (login)
-// userRoutes.get('/:user', userController.getSpecificUser);
+// userRoutes.get('/user', userController.getSpecificUser);
 
 module.exports = { userRoutes };
