@@ -7,7 +7,7 @@ userRoutes.get('/', userController.getUsers);
 // Create new user (sign in)
 userRoutes.post('/', userController.newUser);
 
-// Get a user by email (login)
-// userRoutes.get('/user', userController.getSpecificUser);
+// Get a user by id (login)
+userRoutes.get('/:userId', userController.getSpecificUser);
 
 module.exports = { userRoutes };

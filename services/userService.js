@@ -26,12 +26,12 @@ async function getUsers() {
   }
 }
 
-// get user by email (for login)
-async function getSpecificUser(email) {
+// get user by id (for login)
+async function getSpecificUser(userId) {
   try {
     const userEmail = await prisma.user.findUnique({
       where: {
-        email: String(email)
+        id: Number(userId)
       }
     })
     return userEmail
@@ -45,6 +45,6 @@ async function getSpecificUser(email) {
 module.exports = {
   getUsers,
   newUser,
-  // getSpecificUser
+  getSpecificUser
 
 };

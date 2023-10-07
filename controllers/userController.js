@@ -26,33 +26,28 @@ async function newUser(req, res) {
   }
 }
 
-// Get a user by email
+// Get a user by id
 async function getSpecificUser(req, res) {
-  const { email } = req.query;
-  if (!email) {
-    return res.status(400).json({ error: 'Email query parameter is needed' });
-  };
-
+  const { userId } = req.params;
   try {
-    const user = await userService.getSpecificUser(email);
-
+    const user = await userService.getSpecificUser(userId);
     if (!user) {
-      res.status(404).json({ error: 'User not found.' });
+      return res.status(404).json({ error: 'user not found' });
     }
     res.status(200).json({
-      message: "successfully fetch user",
+      message: "Successfully fetched user",
       data: user
-      });
-    
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to return user.' });
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-};
+}
 
 
 module.exports = {
   getUsers,
   newUser,
-  // getSpecificUser
+  getSpecificUser
 
 };
