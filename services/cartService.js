@@ -32,6 +32,7 @@ async function addProductToCart(userId, productId, quantity) {
         id: Number(productId) },
     });
 
+
     if (!thisUser || !thisProduct) {
       throw new Error('please login to add product to cart');
     }

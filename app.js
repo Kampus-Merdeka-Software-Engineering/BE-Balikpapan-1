@@ -6,6 +6,7 @@ const { shopRoutes } = require('./routes/shopRoutes');
 const { cartRoutes } = require('./routes/cartRoutes');
 const { blogRoutes } = require('./routes/blogRoutes');
 const { homeRoutes } = require('./routes/homeRoutes');
+const { authRoutes } = require('./routes/authRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -30,6 +31,8 @@ app.use('/', blogRouter)
 const homeRouter = express.Router();
 app.use('/', homeRouter)
 
+const authRouter = express.Router();
+app.use('/', authRouter)
 
 // /user
 userRouter.use('/user', userRoutes);
@@ -41,6 +44,8 @@ cartRouter.use('/cart', cartRoutes);
 blogRouter.use('/blog', blogRoutes);
 // /homepage
 homeRouter.use('/home', homeRoutes);
+// auth
+authRouter.use('/auth', authRoutes);
 
 // error handling 
 app.use((err, req, res, next) => {
