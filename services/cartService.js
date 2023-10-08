@@ -18,31 +18,19 @@ async function getCart() {
 }
 
 
+
 //coba post
-async function addProductToCart(userId, productId, quantity) {
+async function addProductToCart(data) {
+  const userId = parseInt(data.userId);
+  const productId = parseInt(data.productId);
+  const quantity = parseInt(data.quantity)
   try {
-    // Check if the user and product exist
-    const thisUser = await prisma.user.findUnique({
-      where: { 
-        id: Number(userId) },
-    });
-
-    const thisProduct = await prisma.product.findUnique({
-      where: { 
-        id: Number(productId) },
-    });
-
-
-    if (!thisUser || !thisProduct) {
-      throw new Error('please login to add product to cart');
-    }
-
     // new entry
     const productAdded = await prisma.addedProduct.create({
       data: {
         user: { connect: { id: userId } },
         product: { connect: { id: productId } },
-        quantity: Number(quantity)
+        quantity: quantity
       },
     });
 
@@ -52,8 +40,36 @@ async function addProductToCart(userId, productId, quantity) {
   }
 }
 
+async function getUserCart(userCartId) {
+  const user = parseInt(userCartId);
+  console.log(user);
+  try {
+    const userCart = await prisma.addedProduct.findMany({
+      where: {
+        userId: {
+          in: [user]
+        }
+      },
+      include: {
+        product: {
+          select: {
+            image: true,
+            productname: true,
+            price: true
+          }
+        }
+
+      }
+    })
+    return userCart
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getCart,
-  addProductToCart
+  addProductToCart,
+  getUserCart
 };
   
