@@ -26,9 +26,10 @@ async function Login(user) {
         if (!findEmail) {
             throw new Error(`username ${user.email} not found`);
         }
-        if (findEmail.password == user.password) {
-            return findEmail;
+        if (findEmail.password != user.password) {
+            throw new Error(`password yang anda masukkan salah`);
         }
+        return findEmail;
 
     } catch (error) {
         throw new Error(error)
