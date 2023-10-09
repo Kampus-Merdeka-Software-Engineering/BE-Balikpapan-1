@@ -17,7 +17,7 @@ async function getFeaturedProducts() {
       where: {
         isFeatured: true
       },
-      skip: 10,
+      skip: 7,
       take: 8
     })
     return products;
@@ -33,6 +33,7 @@ async function getNewArrival() {
       where: {
         newArrival: true
       },
+      skip: 12,
       take: 8
     })
     return products;
