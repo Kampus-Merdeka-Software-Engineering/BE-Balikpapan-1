@@ -4,6 +4,7 @@ const authRoutes = express.Router();
 
 // create new user
 authRoutes.post('/daftar', authController.newUser);
+
 // login
 authRoutes.post('/masuk', authController.Login);
 

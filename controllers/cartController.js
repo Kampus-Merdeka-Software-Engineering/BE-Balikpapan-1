@@ -2,7 +2,7 @@ const cartService = require('../services/cartService');
 
 // get cart by user id
 async function getUserCart(req, res) {
-  const userId = req.params.id; // Replace "userId" with the actual parameter name
+  const userId = req.params.id; 
   console.log(userId)
   try {
     const addedProduct = await cartService.getUserCart(userId);
@@ -16,7 +16,6 @@ async function getUserCart(req, res) {
   }
 }
 
-
 // add product to cart
 async function addProductToCart(req, res) {
   try {
@@ -27,7 +26,6 @@ async function addProductToCart(req, res) {
     res.status(500).json({ error: 'Internal server error' });
   }
 }
-
 
 module.exports = {
   getUserCart,

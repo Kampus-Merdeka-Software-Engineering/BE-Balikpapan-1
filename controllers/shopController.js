@@ -42,8 +42,7 @@ async function getNewArrival(req, res) {
   }
 }
 
-
-// Create a new product
+// Create a new product (via admin only)
 async function createProduct(req, res) {
   try {
     const productCreated = await productService.createProduct(req.body);
@@ -54,8 +53,7 @@ async function createProduct(req, res) {
   }
 }
 
-
-// Get a product by ID
+// Get a product by ID 
 async function getProductById(req, res) {
   const { productId } = req.params;
   try {
@@ -73,13 +71,10 @@ async function getProductById(req, res) {
   }
 }
 
-
 module.exports = {
   getProducts,
   createProduct,
   getNewArrival,
   getFeaturedProducts,
   getProductById
-//   updateProductById,
-//   deleteProductById,
 };

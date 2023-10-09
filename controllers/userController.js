@@ -49,5 +49,4 @@ module.exports = {
   getUsers,
   newUser,
   getSpecificUser
-
 };

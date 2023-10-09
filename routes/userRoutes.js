@@ -2,12 +2,15 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const userRoutes = express.Router();
 
-// get all users
+//FOR API TESTING ONLY
+
+// get all users (via admin only)
 userRoutes.get('/', userController.getUsers);
-// Create new user (sign in)
+
+// Create new user 
 userRoutes.post('/', userController.newUser);
 
-// Get a user by id (login)
+// Get a user by id 
 userRoutes.get('/:userId', userController.getSpecificUser);
 
 module.exports = { userRoutes };

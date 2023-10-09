@@ -1,6 +1,6 @@
 const { prisma } = require('../config/prisma');
 
-//create user (for sign in)
+//create user (testing)
 async function newUser(user) {
   try {
     const userCreated = await prisma.user.create({
@@ -16,7 +16,7 @@ async function newUser(user) {
   }
 }
 
-//get all users
+//get all users (via admin only)
 async function getUsers() {
   try {
     const users = await prisma.user.findMany();
@@ -26,7 +26,7 @@ async function getUsers() {
   }
 }
 
-// get user by id (for login)
+// get user by id (via admin only)
 async function getSpecificUser(userId) {
   try {
     const userEmail = await prisma.user.findUnique({
