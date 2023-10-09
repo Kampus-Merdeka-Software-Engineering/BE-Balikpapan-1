@@ -17,7 +17,8 @@ async function getFeaturedProducts() {
       where: {
         isFeatured: true
       },
-      take: 8,
+      skip: 2,
+      take: 8
     })
     return products;
   } catch(error) {
